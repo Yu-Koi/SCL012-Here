@@ -13,7 +13,7 @@ const  SignIn = (props) => {
 
   return (
     <Fragment>
-      <h1>Iniciar sesion</h1>
+      <h1>Iniciar Sesión</h1>
       <form className="row" onSubmit={login}>
       <div className="col-md-3">
       <input
@@ -37,7 +37,7 @@ const  SignIn = (props) => {
      
       <button type="submit" className="btn btn-primary btn-lg btn-block">Enviar</button>
       <button type="submit" component={Link} to="/register" className="btn btn-secondary btn-lg btn-block">Register</button>
-      
+
       </div>
      </form>
     </Fragment>
@@ -45,8 +45,11 @@ const  SignIn = (props) => {
 
   async function login() {
     try {
+      console.log("HOLA")
       await firebase.login(email, password);
+      console.log(props.history)
       props.history.replace("/dashboard");
+      console.log("CHAO")
     } catch (error) {
       alert(error.message);
     }

@@ -23,10 +23,10 @@ function App() {
   return firebaseInitialized !== false ? (
     <Router>
       <Switch>
-        <Route exact path="/" component={Register}/>
-        <Route exact path="/login" component={HomePage}/>
-        <Route exact path="/register" component={Login}/>
-        <Route exact path="/dashboard" component={Dashboard}/>
+        <Route  path="/homepage" component={HomePage}/>
+        <Route  path="/register" component={Register}/>
+        <Route  path="/dashboard" component={Dashboard}/>
+        <Route exact path="/" component={Login}/>
       </Switch>
     </Router>
   ) : <div id="loader">CircularProgress</div>
