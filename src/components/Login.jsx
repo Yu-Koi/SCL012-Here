@@ -77,6 +77,7 @@ const SignIn = props => {
               onBlur={handleBlur}
             ></input>
           </div>
+          {errors.password && <p>{errors.password}</p>}
 
           {/* BOTON DE INGRESO CON FACEBOOK*/}
 
