@@ -45,7 +45,7 @@ const SignIn = props => {
         </header>
 
         <h5>
-          Si ya tienes cuenta en Huellas, ingresa el correo electrónico y
+          Si yaa tienes cuenta en Huellas, ingresa el correo electrónico y
           contraseña que registraste{" "}
         </h5>
 
