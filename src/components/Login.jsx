@@ -1,24 +1,25 @@
-import React, {Fragment } from "react";
-import { Link, withRouter } from "react-router-dom";
+import React, { Fragment } from "react";
 import firebase from "./firebase";
+import "./Login.css";
+import logo from "../img/logo.png";
+import { Link, withRouter } from "react-router-dom";
 
 
 //validaciones
 import useValidation from "../hooks/useValidation.js";
-import validateLogin from '../validate/validateLogin';
+import validateLogin from "../validate/validateLogin";
 
 const STATE_INICIAL = {
-  email: '',
-  password: ''
-}
+  email: "",
+  password: ""
+};
 
-const SignIn = (props) => {
-
+const SignIn = props => {
   async function login() {
     try {
       await firebase.login(email, password);
-      if(!(await firebase.hashTable(firebase.auth.currentUser.uid))){
-        await firebase.createUserTable()
+      if (!(await firebase.hashTable(firebase.auth.currentUser.uid))) {
+        await firebase.createUserTable();
       }
       props.history.replace("/dashboard");
     } catch (error) {
@@ -26,20 +27,32 @@ const SignIn = (props) => {
     }
   }
 
-  const { values, errors, handleSubmit, handleChange, handleBlur } = useValidation ( STATE_INICIAL, validateLogin, login );
+  const {
+    values,
+    errors,
+    handleSubmit,
+    handleChange,
+    handleBlur
+  } = useValidation(STATE_INICIAL, validateLogin, login);
 
   const { email, password } = values;
 
-   
-
   return (
     <Fragment>
-      <h1>Iniciar sesion</h1>
-      <form className="row" onSubmit={handleSubmit} noValidate>
-        <div className="col-md-12">
-          <div>
+      <div className="first_view">
+        <header className="app_header">
+          <img src={logo} className="huellas_logo" alt="logo" />
+        </header>
+
+        <h5>
+          Si ya tienes cuenta en Huellas, ingresa el correo electrónico y
+          contraseña que registraste{" "}
+        </h5>
+
+        <form className="row" onSubmit={handleSubmit} noValidate>
           <input
-            placeholder="Enter your e-mail"
+            class="email"
+            placeholder="Ingresa Email"
             className="form-control"
             type="email"
             name="email"
@@ -49,44 +62,49 @@ const SignIn = (props) => {
             onChange={handleChange}
             onBlur={handleBlur}
           ></input>
-          </div>
 
           {errors.email && <p>{errors.email}</p>}
 
           <div>
-          <input
-            placeholder="Enter your password"
-            className="form-control"
-            type="password"
-            name="password"
-            autoComplete="off"
-            value={password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          ></input>
+            <input
+              placeholder="Ingresa Contraseña"
+              className="form-control"
+              type="password"
+              name="password"
+              autoComplete="off"
+              value={password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            ></input>
           </div>
 
-          {errors.password && <p>{errors.password}</p>}
+          {/* BOTON DE INGRESO CON FACEBOOK*/}
 
-          <div>
-          <button
-            to="/home-pages"
-            type="submit"
-            className="btn btn-info"
-          >
-            Enviar
+          <button className="login_facebook" to="/home-pages" type="submit">
+            <Link to="/home-page">Ingresa con Facebook</Link>
           </button>
 
-          <button
-            type="submit"
-            to="/register"
-            className="btn btn-secondary"
-          >
-            <Link to="/register">Register</Link>
+          {/* BOTON DE INGRESO CON GOOGLE*/}
+
+          <button className="login_google" to="/home-pages" type="submit">
+            <Link to="/home-page">Ingresa con Google</Link>
           </button>
-          </div>
-        </div>
-      </form>
+
+          {/* BOTON DE INGRESO- LOGIN*/}
+
+          <button className="login" to="/home-pages" type="submit">
+            <Link to="/home-page">Ingresar</Link>
+          </button>
+
+          {/* BOTON DE REGISTRO*/}
+          <h6>
+            Si no estas registrado ingresa{" "}
+            <button className="register" type="submit" to="/register">
+              <Link to="/register">aquí</Link>
+            </button>{" "}
+          </h6>
+        </form>
+      </div>
     </Fragment>
   );
 };

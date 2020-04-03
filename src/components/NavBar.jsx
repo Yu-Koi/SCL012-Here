@@ -16,7 +16,7 @@ function NavBar() {
         </Link>
       </div>
       <div id="location">
-        <Link to="/location" className="w3-bar-item w3-button">
+        <Link to="/home-page/location" className="w3-bar-item w3-button">
           <i className="fas fa-map-marker-alt"></i>
         </Link>
       </div>
